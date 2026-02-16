@@ -1,0 +1,268 @@
+from IPython.display import HTML
+
+html_content = """
+<!DOCTYPE html>
+<html>
+<head>
+<title>Movie Review - Grid Style</title>
+<style>
+body{
+    font-family: Arial;
+    background:#111;
+    color:white;
+    text-align:center;
+}
+h1{margin:20px;}
+
+.filter button{
+    padding:8px 15px;
+    margin:10px;
+    cursor:pointer;
+    border:none;
+    background:red;
+    color:white;
+}
+
+.container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+}
+
+.card{
+    background:#222;
+    width:220px;
+    padding:10px;
+    border-radius:10px;
+    transition:0.3s;
+}
+.card:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 20px red;
+}
+.card img{
+    width:100%;
+    border-radius:8px;
+}
+.stars{
+    font-size:20px;
+    color:gold;
+    cursor:pointer;
+}
+
+iframe{
+    width:100%;
+    height:150px;
+    margin-top:10px;
+}
+</style>
+</head>
+<body>
+
+<h1>🎬 Movie Review (Grid)</h1>
+
+<div class="filter">
+    <button onclick="filter('all')">All</button>
+    <button onclick="filter('action')">Action</button>
+    <button onclick="filter('drama')">Drama</button>
+</div>
+
+<div class="container">
+    <div class="card action">
+        <img src="https://via.placeholder.com/200x300">
+        <h3>Action Movie</h3>
+        <div class="stars" onclick="rate(this)">★★★★★</div>
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+    </div>
+
+    <div class="card drama">
+        <img src="https://via.placeholder.com/200x300">
+        <h3>Drama Movie</h3>
+        <div class="stars" onclick="rate(this)">★★★★★</div>
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+    </div>
+</div>
+
+<script>
+function filter(genre){
+    let cards=document.querySelectorAll('.card');
+    cards.forEach(card=>{
+        if(genre==='all'||card.classList.contains(genre)){
+            card.style.display='block';
+        }else{
+            card.style.display='none';
+        }
+    });
+}
+
+function rate(element){
+    let rating=prompt("Rate 1-5");
+    if(rating>=1 && rating<=5){
+        element.innerHTML="★".repeat(rating)+"☆".repeat(5-rating);
+    }
+}
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Movie Review - Slider</title>
+<style>
+body{
+    font-family:Arial;
+    background:black;
+    color:white;
+    text-align:center;
+}
+
+.slider{
+    display:flex;
+    overflow-x:auto;
+    gap:20px;
+    padding:20px;
+}
+
+.card{
+    min-width:220px;
+    background:#222;
+    padding:10px;
+    border-radius:10px;
+    transition:0.3s;
+}
+.card:hover{
+    transform:translateY(-10px);
+}
+
+img{
+    width:100%;
+    border-radius:8px;
+}
+
+.stars{
+    color:gold;
+    cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<h1>🎬 Movie Review (Slider)</h1>
+
+<div class="slider">
+    <div class="card action">
+        <img src="https://via.placeholder.com/200x300">
+        <h3>Comedy Movie</h3>
+        <div class="stars" onclick="rate(this)">★★★★★</div>
+        <iframe width="100%" height="150"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        allowfullscreen></iframe>
+    </div>
+
+    <div class="card drama">
+        <img src="https://via.placeholder.com/200x300">
+        <h3>Drama Movie</h3>
+        <div class="stars" onclick="rate(this)">★★★★★</div>
+        <iframe width="100%" height="150"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        allowfullscreen></iframe>
+    </div>
+</div>
+
+<script>
+function rate(element){
+    let rating=prompt("Rate 1-5");
+    if(rating>=1 && rating<=5){
+        element.innerHTML="★".repeat(rating)+"☆".repeat(5-rating);
+    }
+}
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Movie Review - Expand Style</title>
+<style>
+body{
+    font-family:Arial;
+    background:#111;
+    color:white;
+    text-align:center;
+}
+
+.card{
+    background:#222;
+    width:60%;
+    margin:20px auto;
+    padding:20px;
+    border-radius:10px;
+    transition:0.3s;
+}
+.card:hover{
+    box-shadow:0 0 20px red;
+}
+
+.review{
+    display:none;
+    margin-top:10px;
+}
+
+button{
+    padding:8px 15px;
+    background:red;
+    color:white;
+    border:none;
+    margin-top:10px;
+}
+
+.stars{
+    color:gold;
+    cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<h1>🎬 Movie Review (Expandable)</h1>
+
+<div class="card">
+    <h2>Action Movie</h2>
+    <div class="stars" onclick="rate(this)">★★★★★</div>
+
+    <button onclick="toggleReview()">Read Review</button>
+
+    <div class="review" id="review">
+        <p>This is an amazing action movie with thrilling scenes and strong storyline.</p>
+        <iframe width="100%" height="200"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        allowfullscreen></iframe>
+    </div>
+</div>
+
+<script>
+function toggleReview(){
+    let review=document.getElementById("review");
+    if(review.style.display==="block"){
+        review.style.display="none";
+    }else{
+        review.style.display="block";
+    }
+}
+
+function rate(element){
+    let rating=prompt("Rate 1-5");
+    if(rating>=1 && rating<=5){
+        element.innerHTML="★".repeat(rating)+"☆".repeat(5-rating);
+    }
+}
+</script>
+
+</body>
+</html>
+"""
+
+HTML(html_content)
